@@ -11,6 +11,8 @@ export default class LevelTransition extends Phaser.Scene {
     create() {
         const SW = this.scale.width;
         const SH = this.scale.height;
+        const mob = SW < 640;
+        const sc = mob ? 0.82 : (SW > 1200 ? 1.15 : 1.0);
 
         this.add.rectangle(SW / 2, SH / 2, SW, SH, 0x000810);
         const g = this.add.graphics();
@@ -31,8 +33,8 @@ export default class LevelTransition extends Phaser.Scene {
         // Level tag
         const tagLabel = isBoss ? '— BOSS LEVEL —' : `LEVEL ${this.level}`;
         const tagColor = isBoss ? '#cc4422' : '#3a8a6a';
-        this.add.text(SW / 2, SH / 2 - 86, tagLabel, {
-            fontSize: '15px', color: tagColor, fontFamily: 'monospace'
+        this.add.text(SW / 2, SH / 2 - Math.round(86 * sc), tagLabel, {
+            fontSize: Math.round(15 * sc) + 'px', color: tagColor, fontFamily: 'monospace'
         }).setOrigin(0.5);
 
         // Level name
@@ -46,14 +48,14 @@ export default class LevelTransition extends Phaser.Scene {
         ];
         const name = names[this.level] || `LEVEL ${this.level}`;
 
-        const title = this.add.text(SW / 2, SH / 2 - 30, name, {
-            fontSize: isBoss ? '46px' : '50px',
+        const title = this.add.text(SW / 2, SH / 2 - Math.round(30 * sc), name, {
+            fontSize: Math.round((isBoss ? 46 : 50) * sc) + 'px',
             color: isBoss ? '#ff4422' : '#00ffcc',
             fontFamily: 'monospace',
             shadow: {
                 offsetX: 0, offsetY: 0,
                 color: isBoss ? '#ff2200' : '#00ffcc',
-                blur: isBoss ? 28 : 18,
+                blur: Math.round((isBoss ? 28 : 18) * sc),
                 fill: true
             }
         }).setOrigin(0.5).setAlpha(0);
@@ -68,22 +70,22 @@ export default class LevelTransition extends Phaser.Scene {
             'Your oxygen drains faster in the deep.',
             'Maximum depth. 8 creatures. No mercy.',
         ];
-        this.add.text(SW / 2, SH / 2 + 42, hints[this.level] || '', {
-            fontSize: '14px',
+        this.add.text(SW / 2, SH / 2 + Math.round(42 * sc), hints[this.level] || '', {
+            fontSize: Math.round(14 * sc) + 'px',
             color: isBoss ? '#882200' : '#3a8a6a',
             fontFamily: 'monospace'
         }).setOrigin(0.5);
 
         // Running score
-        this.add.text(SW / 2, SH / 2 + 72, `SCORE: ${this.totalScore}`, {
-            fontSize: '13px', color: '#1a4a3a', fontFamily: 'monospace'
+        this.add.text(SW / 2, SH / 2 + Math.round(72 * sc), `SCORE: ${this.totalScore}`, {
+            fontSize: Math.round(13 * sc) + 'px', color: '#1a4a3a', fontFamily: 'monospace'
         }).setOrigin(0.5);
 
         // Boss extra warning
         if (isBoss) {
-            const warn = this.add.text(SW / 2, SH / 2 + 100,
+            const warn = this.add.text(SW / 2, SH / 2 + Math.round(100 * sc),
                 '8 CREATURES  ·  DENSE MAZE  ·  HIGH OXYGEN DRAIN', {
-                fontSize: '12px', color: '#882200', fontFamily: 'monospace'
+                fontSize: Math.round(12 * sc) + 'px', color: '#882200', fontFamily: 'monospace'
             }).setOrigin(0.5).setAlpha(0);
             this.tweens.add({
                 targets: warn, alpha: 0.9,
