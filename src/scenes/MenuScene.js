@@ -227,8 +227,8 @@ export default class MenuScene extends Phaser.Scene {
         const items = [];
 
         const completedLevels = this._loadCompleted();
-        const bg = this.add.rectangle(SW / 2, SH / 2, SW, SH, 0x000810, 1.0).setDepth(50); // Made solid
-        const panel = this.add.rectangle(SW / 2, SH / 2, Math.min(560, SW - 24), Math.min(520, SH - 40), 0x0a1a24).setDepth(51).setStrokeStyle(1.5, 0x1a6a5a, 1);
+        const bg = this.add.rectangle(SW / 2, SH / 2, SW, SH, 0x000810, 0.96).setDepth(50); // Keep slightly dark
+        const panel = this.add.rectangle(SW / 2, SH / 2, Math.min(560, SW - 24), Math.min(520, SH - 40), 0x03121a, 1.0).setDepth(51).setStrokeStyle(1.5, 0x1a6a5a, 1);
         items.push(bg, panel);
         items.push(this.add.text(SW / 2, SH / 2 - Math.min(230, SH / 2 - 30), '📊  SELECT LEVEL', { fontSize: Math.round(20 * sc) + 'px', color: '#00ffcc', fontFamily: 'monospace', shadow: { offsetX: 0, offsetY: 0, color: '#00ffcc', blur: 12, fill: true } }).setOrigin(0.5).setDepth(52));
         items.push(this.add.text(SW / 2, SH / 2 - Math.min(210, SH / 2 - 50), 'Jump to any accessible level. Score resets.', { fontSize: Math.round(10 * sc) + 'px', color: '#1a4a3a', fontFamily: 'monospace' }).setOrigin(0.5).setDepth(52));
@@ -300,8 +300,8 @@ export default class MenuScene extends Phaser.Scene {
         const mob = SW < 640, sc = this._sc;
         const items = [];
 
-        const bg = this.add.rectangle(SW / 2, SH / 2, SW, SH, 0x000810, 1.0).setDepth(50); // Made solid
-        const panel = this.add.rectangle(SW / 2, SH / 2, Math.min(560, SW - 24), Math.min(500, SH - 40), 0x0a1a24).setDepth(51).setStrokeStyle(1.5, 0x1a6a5a, 1);
+        const bg = this.add.rectangle(SW / 2, SH / 2, SW, SH, 0x000810, 0.96).setDepth(50); // Keep slightly dark
+        const panel = this.add.rectangle(SW / 2, SH / 2, Math.min(560, SW - 24), Math.min(500, SH - 40), 0x03121a, 1.0).setDepth(51).setStrokeStyle(1.5, 0x1a6a5a, 1);
         items.push(bg, panel);
         items.push(this.add.text(SW / 2, SH / 2 - Math.min(215, SH / 2 - 32), '— ABOUT ABYSS —', { fontSize: Math.round(20 * sc) + 'px', color: '#00ffcc', fontFamily: 'monospace', shadow: { offsetX: 0, offsetY: 0, color: '#00ffcc', blur: 12, fill: true } }).setOrigin(0.5).setDepth(52));
 

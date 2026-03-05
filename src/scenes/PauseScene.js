@@ -26,13 +26,21 @@ export default class PauseScene extends Phaser.Scene {
         for (let i = 0; i <= this.currentLevel; i++) this._accessibleLevels.add(i);
         this._completedLevels.forEach(l => { this._accessibleLevels.add(l); this._accessibleLevels.add(l + 1); });
 
-        // Full dim + scanlines on a single depth layer
-        this.add.rectangle(SW / 2, SH / 2, SW, SH, 0x000810, 1.0).setDepth(0); // Made solid
-        const sl = this.add.graphics().setDepth(1);
-        sl.lineStyle(1, 0x000000, 0.07);
-        for (let y = 0; y < SH; y += 5) sl.lineBetween(0, y, SW, y);
+        // Fully opaque background — GameScene camera is hidden so this is all you see
+        this.add.rectangle(SW / 2, SH / 2, SW, SH, 0x000d18, 1.0).setDepth(0);
 
-        this._container = this.add.container(0, 0).setDepth(2);
+        // Subtle grid lines for "deep sea" feel
+        const sl = this.add.graphics().setDepth(1);
+        sl.lineStyle(1, 0x002233, 0.4);
+        for (let y = 0; y < SH; y += 40) sl.lineBetween(0, y, SW, y);
+        for (let x = 0; x < SW; x += 40) sl.lineBetween(x, 0, x, SH);
+
+        // Subtle scanlines
+        const scan = this.add.graphics().setDepth(2);
+        scan.lineStyle(1, 0x000000, 0.12);
+        for (let y = 0; y < SH; y += 4) scan.lineBetween(0, y, SW, y);
+
+        this._container = this.add.container(0, 0).setDepth(10);
         this._buildMainTab();
 
         // ESC / DLEFT = back or resume
@@ -68,7 +76,7 @@ export default class PauseScene extends Phaser.Scene {
         const panelH = Math.min(440, SH - 80);
         const px = SW / 2, py = SH / 2;
 
-        C.add(this.add.rectangle(px, py, panelW, panelH, 0x0a1a24).setStrokeStyle(1.5, 0x1a6a5a, 1));
+        C.add(this.add.rectangle(px, py, panelW, panelH, 0x03121a, 1.0).setStrokeStyle(1.5, 0x1a6a5a, 1));
         C.add(this.add.text(px, py - panelH / 2 + 30, '⏸  PAUSED', {
             fontSize: this._fs(28), color: '#00ffcc', fontFamily: 'monospace',
             shadow: { offsetX: 0, offsetY: 0, color: '#00ffcc', blur: 12, fill: true }
@@ -130,7 +138,7 @@ export default class PauseScene extends Phaser.Scene {
         const panelW = Math.min(540, SW - 30), panelH = Math.min(490, SH - 60);
         const px = SW / 2, py = SH / 2;
 
-        C.add(this.add.rectangle(px, py, panelW, panelH, 0x0a1a24).setStrokeStyle(1.5, 0x1a6a5a, 1));
+        C.add(this.add.rectangle(px, py, panelW, panelH, 0x03121a, 1.0).setStrokeStyle(1.5, 0x1a6a5a, 1));
         C.add(this.add.text(px, py - panelH / 2 + 28, '📊  LEVELS', {
             fontSize: this._fs(22), color: '#00ffcc', fontFamily: 'monospace',
             shadow: { offsetX: 0, offsetY: 0, color: '#00ffcc', blur: 10, fill: true }
@@ -186,7 +194,7 @@ export default class PauseScene extends Phaser.Scene {
         const panelW = Math.min(430, SW - 40), panelH = Math.min(390, SH - 80);
         const px = SW / 2, py = SH / 2;
 
-        C.add(this.add.rectangle(px, py, panelW, panelH, 0x0a1a24).setStrokeStyle(1.5, 0x1a6a5a, 1));
+        C.add(this.add.rectangle(px, py, panelW, panelH, 0x03121a, 1.0).setStrokeStyle(1.5, 0x1a6a5a, 1));
         C.add(this.add.text(px, py - panelH / 2 + 28, '🔊  SETTINGS', {
             fontSize: this._fs(22), color: '#00ffcc', fontFamily: 'monospace',
             shadow: { offsetX: 0, offsetY: 0, color: '#00ffcc', blur: 10, fill: true }

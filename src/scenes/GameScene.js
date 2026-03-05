@@ -805,8 +805,8 @@ export default class GameScene extends Phaser.Scene {
         const mobilePause = this.mobile.isPauseJustPressed?.() || false;
         if ((escJust || gpPause || mobilePause) && !this.playerDead && !this.levelComplete) {
             if (!this.isTutorial) this.audio.stopMusic();
-            // Dim camera for "blur behind" pause effect
-            this.cameras.main.setAlpha(0.35);
+            // Fully hide GameScene camera so PauseScene renders cleanly with no bleed-through
+            this.cameras.main.setAlpha(0);
             this.scene.pause('GameScene');
             this.scene.launch('PauseScene', { level: this.level, score: this.totalScore });
             if (gp?.connected) gp.endFrame();
