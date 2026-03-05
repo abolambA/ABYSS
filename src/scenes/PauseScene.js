@@ -51,7 +51,7 @@ export default class PauseScene extends Phaser.Scene {
     }
 
     shutdown() {
-        // Restore GameScene camera brightness
+        // Restore GameScene camera brightness — always called when PauseScene stops
         try {
             const gs = this.scene.get('GameScene');
             if (gs?.cameras?.main) gs.cameras.main.setAlpha(1.0);
@@ -279,6 +279,11 @@ export default class PauseScene extends Phaser.Scene {
     }
 
     resume() {
+        // MUST restore camera FIRST before any scene transitions
+        try {
+            const gs = this.scene.get('GameScene');
+            if (gs?.cameras?.main) gs.cameras.main.setAlpha(1.0);
+        } catch (e) { }
         this.scene.stop('PauseScene');
         this.scene.resume('GameScene');
         try {
