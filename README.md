@@ -4,7 +4,6 @@
 
 Your submarine has crashed 8,400 meters below the surface. Your oxygen is rapidly depleting. To survive, you must rely on your sonar to navigate a pitch-black labyrinth, manage sparse air tanks, and evade terrifying, sound-sensitive creatures that patrol the deep. Balance the need to see with the need to hide across 5 challenging levels. Can you survive the dark?
 
-![Abyss Gameplay Screen](public/fog_preview.png) *(Preview Example)*
 
 ## ✨ Features
 *   **Sonar-Based Stealth:** You can't see the map unless you ping your sonar, but every ping runs the risk of drawing the creatures straight to you. 
